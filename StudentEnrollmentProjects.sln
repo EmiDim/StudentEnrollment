@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1000
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{DA11F93D-291D-49E5-BA77-32B1AF0F67C8}"
+	ProjectSection(SolutionItems) = preProject
+		Documents\DocumentDB.docx = Documents\DocumentDB.docx
+		Documents\ERD_StudentEnrollments.docx = Documents\ERD_StudentEnrollments.docx
+		Documents\LessonsLearned.docx = Documents\LessonsLearned.docx
+		Documents\MetaDataWorkSheet.xlsx = Documents\MetaDataWorkSheet.xlsx
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQLScripts", "SQLScripts", "{CC99824C-0CAC-4CCD-A2BC-27D2BBED4E4E}"
+	ProjectSection(SolutionItems) = preProject
+		SQLScripts\0-Investigating Data Techniques.sql = SQLScripts\0-Investigating Data Techniques.sql
+		SQLScripts\1-Create the DWStudentEnrollments database.sql = SQLScripts\1-Create the DWStudentEnrollments database.sql
+		SQLScripts\2-Perform the ETL process.sql = SQLScripts\2-Perform the ETL process.sql
+		SQLScripts\3-ETLViewsForTabluarModel.sql = SQLScripts\3-ETLViewsForTabluarModel.sql
+		SQLScripts\4-ETLViewsForDocumentModel.sql = SQLScripts\4-ETLViewsForDocumentModel.sql
+		SQLScripts\5-ReportView.sql = SQLScripts\5-ReportView.sql
+	EndProjectSection
+EndProject
+Project("{D2ABAB84-BF74-430A-B69E-9DC6D40DDA17}") = "StudentEnrollmentCubes", "StudentEnrollmentCubes\StudentEnrollmentCubes.dwproj", "{C5F26C95-95D9-4631-8D20-FF6BD4A45AC8}"
+EndProject
+Project("{6870E480-7721-4708-BFB8-9AE898AA21B3}") = "StudentEnrollmentTabularModel", "StudentEnrollmentTabularModel\StudentEnrollmentTabularModel.smproj", "{8CE414BB-95B2-4C99-9E03-51BA72086E22}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reports", "Reports", "{D2AB2B8D-49E2-4436-8511-A3D97B5993D0}"
+	ProjectSection(SolutionItems) = preProject
+		Reports\DocumentDBData.csv = Reports\DocumentDBData.csv
+		Reports\ExcelReports.xlsx = Reports\ExcelReports.xlsx
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|x86 = Development|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C5F26C95-95D9-4631-8D20-FF6BD4A45AC8}.Development|x86.ActiveCfg = Development
+		{C5F26C95-95D9-4631-8D20-FF6BD4A45AC8}.Development|x86.Build.0 = Development
+		{C5F26C95-95D9-4631-8D20-FF6BD4A45AC8}.Development|x86.Deploy.0 = Development
+		{8CE414BB-95B2-4C99-9E03-51BA72086E22}.Development|x86.ActiveCfg = Development|x86
+		{8CE414BB-95B2-4C99-9E03-51BA72086E22}.Development|x86.Build.0 = Development|x86
+		{8CE414BB-95B2-4C99-9E03-51BA72086E22}.Development|x86.Deploy.0 = Development|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B51505ED-19F4-41A1-8A2D-E9330BBA3AE8}
+	EndGlobalSection
+EndGlobal

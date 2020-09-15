@@ -1,0 +1,387 @@
+{
+  "name": "SemanticModel",
+  "compatibilityLevel": 1500,
+  "model": {
+    "culture": "en-US",
+    "dataSources": [
+      {
+        "type": "structured",
+        "name": "SQL/DESKTOP-BME09T7\\MSSQLSERVER01;DWStudentEnrollments",
+        "connectionDetails": {
+          "protocol": "tds",
+          "address": {
+            "server": "DESKTOP-BME09T7\\MSSQLSERVER01",
+            "database": "DWStudentEnrollments"
+          },
+          "authentication": null,
+          "query": null
+        },
+        "options": {},
+        "credential": {
+          "AuthenticationKind": "Windows",
+          "kind": "SQL",
+          "path": "desktop-bme09t7\\mssqlserver01;DWStudentEnrollments",
+          "Username": "DESKTOP-BME09T7\\emili",
+          "EncryptConnection": false
+        }
+      }
+    ],
+    "tables": [
+      {
+        "name": "Dates",
+        "dataCategory": "Time",
+        "columns": [
+          {
+            "name": "Date",
+            "dataType": "dateTime",
+            "isKey": true,
+            "sourceColumn": "DateKey"
+          },
+          {
+            "name": "FullDateTime",
+            "dataType": "dateTime",
+            "sourceColumn": "FullDateTime"
+          },
+          {
+            "name": "DateName",
+            "dataType": "string",
+            "sourceColumn": "DateName"
+          },
+          {
+            "name": "MonthKey",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "MonthKey"
+          },
+          {
+            "name": "Month",
+            "dataType": "string",
+            "sourceColumn": "MonthName",
+            "sortByColumn": "MonthKey"
+          },
+          {
+            "name": "QuarterKey",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "QuarterKey"
+          },
+          {
+            "name": "Quarter",
+            "dataType": "string",
+            "sourceColumn": "QuarterName",
+            "sortByColumn": "QuarterKey"
+          },
+          {
+            "name": "YearKey",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "YearKey"
+          },
+          {
+            "name": "Year",
+            "dataType": "string",
+            "sourceColumn": "Yearname",
+            "sortByColumn": "YearKey"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/DESKTOP-BME09T7\\MSSQLSERVER01;DWStudentEnrollments\",",
+                "    dbo_vTabularDimDates = Source{[Schema=\"dbo\",Item=\"vTabularDimDates\"]}[Data]",
+                "in",
+                "    dbo_vTabularDimDates"
+              ]
+            }
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Year-Qtr-Month-Day",
+            "levels": [
+              {
+                "name": "Year",
+                "ordinal": 0,
+                "column": "Year"
+              },
+              {
+                "name": "Quarter",
+                "ordinal": 1,
+                "column": "Quarter"
+              },
+              {
+                "name": "Month",
+                "ordinal": 2,
+                "column": "Month"
+              },
+              {
+                "name": "Date",
+                "ordinal": 3,
+                "column": "Date"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Students",
+        "columns": [
+          {
+            "name": "Student",
+            "dataType": "int64",
+            "sourceColumn": "StudentKey"
+          },
+          {
+            "name": "StudentID",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "StudentID"
+          },
+          {
+            "name": "StudentFullName",
+            "dataType": "string",
+            "sourceColumn": "StudentFullName"
+          },
+          {
+            "name": "StudentEmail",
+            "dataType": "string",
+            "sourceColumn": "StudentEmail"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/DESKTOP-BME09T7\\MSSQLSERVER01;DWStudentEnrollments\",",
+                "    dbo_vTabularDimStudents = Source{[Schema=\"dbo\",Item=\"vTabularDimStudents\"]}[Data]",
+                "in",
+                "    dbo_vTabularDimStudents"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Enrollments",
+        "columns": [
+          {
+            "name": "EnrollmentID",
+            "dataType": "int64",
+            "isHidden": true,
+            "isKey": true,
+            "sourceColumn": "EnrollmentID",
+            "keepUniqueRows": true
+          },
+          {
+            "name": "EnrollmentDate",
+            "dataType": "dateTime",
+            "sourceColumn": "EnrollmentDateKey",
+            "keepUniqueRows": true
+          },
+          {
+            "name": "Student",
+            "dataType": "int64",
+            "sourceColumn": "StudentKey",
+            "keepUniqueRows": true
+          },
+          {
+            "name": "Class",
+            "dataType": "int64",
+            "sourceColumn": "ClassKey",
+            "keepUniqueRows": true
+          },
+          {
+            "name": "ActualEnrollmentPrice",
+            "dataType": "decimal",
+            "sourceColumn": "ActualEnrollmentPrice"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/DESKTOP-BME09T7\\MSSQLSERVER01;DWStudentEnrollments\",",
+                "    dbo_vTabularFactEnrollments = Source{[Schema=\"dbo\",Item=\"vTabularFactEnrollments\"]}[Data]",
+                "in",
+                "    dbo_vTabularFactEnrollments"
+              ]
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "EnrollmentDollars",
+            "expression": "sum(Enrollments[ActualEnrollmentPrice])",
+            "formatString": "\\$#,0.00;(\\$#,0.00);\\$#,0.00",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\"><Currency LCID=\"1033\" DisplayName=\"$ English (United States)\" Symbol=\"$\" PositivePattern=\"0\" NegativePattern=\"0\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "EnrollmentCounts",
+            "expression": "count(Enrollments[EnrollmentID])"
+          }
+        ]
+      },
+      {
+        "name": "Classes",
+        "columns": [
+          {
+            "name": "ClassKey",
+            "dataType": "int64",
+            "sourceColumn": "ClassKey"
+          },
+          {
+            "name": "ClassID",
+            "dataType": "int64",
+            "sourceColumn": "ClassID"
+          },
+          {
+            "name": "ClassName",
+            "dataType": "string",
+            "sourceColumn": "ClassName"
+          },
+          {
+            "name": "DepartmentID",
+            "dataType": "int64",
+            "sourceColumn": "DepartmentID"
+          },
+          {
+            "name": "DepartmentName",
+            "dataType": "string",
+            "sourceColumn": "DepartmentName"
+          },
+          {
+            "name": "ClassStartDate",
+            "dataType": "dateTime",
+            "sourceColumn": "ClassStartDate"
+          },
+          {
+            "name": "ClassEndDate",
+            "dataType": "dateTime",
+            "sourceColumn": "ClassEndDate"
+          },
+          {
+            "name": "CurrentCoursePrice",
+            "dataType": "decimal",
+            "sourceColumn": "CurrentCoursePrice"
+          },
+          {
+            "name": "MaxCourseEnrollment",
+            "dataType": "int64",
+            "sourceColumn": "MaxCourseEnrollment"
+          },
+          {
+            "name": "ClassroomID",
+            "dataType": "int64",
+            "sourceColumn": "ClassroomID"
+          },
+          {
+            "name": "ClassroomName",
+            "dataType": "string",
+            "sourceColumn": "ClassroomName"
+          },
+          {
+            "name": "MaxClassroomSize",
+            "dataType": "int64",
+            "sourceColumn": "MaxClassroomSize"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/DESKTOP-BME09T7\\MSSQLSERVER01;DWStudentEnrollments\",",
+                "    dbo_vTabularDimClasses = Source{[Schema=\"dbo\",Item=\"vTabularDimClasses\"]}[Data]",
+                "in",
+                "    dbo_vTabularDimClasses"
+              ]
+            }
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "ClassesByDepartment",
+            "levels": [
+              {
+                "name": "DepartmentName",
+                "ordinal": 0,
+                "column": "DepartmentName"
+              },
+              {
+                "name": "ClassName",
+                "ordinal": 1,
+                "column": "ClassName"
+              }
+            ]
+          },
+          {
+            "name": "ClassesByClassroom",
+            "levels": [
+              {
+                "name": "ClassroomName",
+                "ordinal": 0,
+                "column": "ClassroomName"
+              },
+              {
+                "name": "ClassName",
+                "ordinal": 1,
+                "column": "ClassName"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "name": "e1d6d0c6-b388-4b2c-8252-fcec8f6d792b",
+        "fromTable": "Enrollments",
+        "fromColumn": "Student",
+        "toTable": "Students",
+        "toColumn": "Student"
+      },
+      {
+        "name": "249ca1e5-bd0b-449f-8405-8d98579e123d",
+        "fromTable": "Enrollments",
+        "fromColumn": "EnrollmentDate",
+        "toTable": "Dates",
+        "toColumn": "Date"
+      },
+      {
+        "name": "83c5053a-c67a-4f62-9e65-494519d57746",
+        "fromTable": "Enrollments",
+        "fromColumn": "Class",
+        "toTable": "Classes",
+        "toColumn": "ClassKey"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "ClientCompatibilityLevel",
+        "value": "600"
+      }
+    ]
+  },
+  "id": "SemanticModel"
+}
